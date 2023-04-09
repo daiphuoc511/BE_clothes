@@ -1,7 +1,7 @@
 package com.example.be.controller;
 
-import com.example.be.entity.User;
-import com.example.be.service.UserService;
+import com.example.be.entity.Product;
+import com.example.be.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +15,16 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("api/user")
-public class UserController {
+public class ProductController {
 
     @Autowired
-    UserService userService;
+    ProductService productService;
 
-    @GetMapping("/all_user")
-    public ResponseEntity<List<User>> getAllMovie() {
+    @GetMapping("/all_product")
+    public ResponseEntity<List<Product>> getAllMovie() {
         try {
-            List<User> users = userService.getAllUser();
-            return new ResponseEntity<>(users, HttpStatus.OK);
+            List<Product> products = productService.getAllProduct();
+            return new ResponseEntity<>(products, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
