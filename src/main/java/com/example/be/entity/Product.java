@@ -43,6 +43,24 @@ public class Product {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "s")
+    private Integer s;
+
+    @Column(name = "m")
+    private Integer m;
+
+    @Column(name = "l")
+    private Integer l;
+
+    @Column(name = "xl")
+    private Integer xl;
+
+    @Column(name = "xxl")
+    private Integer xxl;
+
+    @Column(name = "xxxl")
+    private Integer xxxl;
+
     @Column(name = "clothes_type", columnDefinition = "bit(1)")
     private Boolean clothesType;
 
@@ -53,8 +71,4 @@ public class Product {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
-
-    @OneToMany(mappedBy = "product")
-    @JsonBackReference
-    private Set<Size> sizes;
 }
