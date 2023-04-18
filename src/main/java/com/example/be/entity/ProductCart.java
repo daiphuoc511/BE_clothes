@@ -15,7 +15,7 @@ import lombok.Setter;
 public class ProductCart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "product_cart_id")
     private Integer productCartId;
 
