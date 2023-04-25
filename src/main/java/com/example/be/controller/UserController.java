@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("api/user")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
     @Autowired
     UserService userService;
 
     @GetMapping("/all_user")
-    public ResponseEntity<List<User>> getAllMovie() {
+    public ResponseEntity<List<User>> getAllUser() {
         try {
             List<User> users = userService.getAllUser();
             return new ResponseEntity<>(users, HttpStatus.OK);

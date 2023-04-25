@@ -1,9 +1,12 @@
 package com.example.be.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,14 +19,24 @@ import java.util.Set;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "role_id")
     private Integer roleId;
 
     @Column(name = "role_name", columnDefinition = "VARCHAR(50)")
     private String roleName;
 
-    @OneToMany(mappedBy = "role")
-    @JsonBackReference
-    private Set<AccountRole> roles;
+    @ManyToMany(mappedBy = "roles")
+    @Fetch(value = FetchMode.SELECT)
+    @JsonIgnore
+    private Set<User> user = new HashSet<>();
+
+    public Role(Integer roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+    }
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
 }
