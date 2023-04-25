@@ -40,9 +40,6 @@ public class Product {
     @Column(name = "color", columnDefinition = "VARCHAR(255)")
     private String color;
 
-    @Column(name = "quantity")
-    private Integer quantity;
-
     @Column(name = "s")
     private Integer s;
 
@@ -64,9 +61,12 @@ public class Product {
     @Column(name = "clothes_type", columnDefinition = "bit(1)")
     private Boolean clothesType;
 
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
     @OneToMany(mappedBy = "product")
     @JsonBackReference
-    private Set<ProductCart> roles;
+    private Set<ProductCart> productCarts;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
