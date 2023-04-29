@@ -26,7 +26,7 @@ public class Role {
     @Column(name = "role_name", columnDefinition = "VARCHAR(50)")
     private String roleName;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SELECT)
     @JsonIgnore
     private Set<User> user = new HashSet<>();
@@ -34,6 +34,10 @@ public class Role {
     public Role(Integer roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;
+    }
+
+    public Role(Integer roleId) {
+        this.roleId = roleId;
     }
 
     public Role(String roleName) {
