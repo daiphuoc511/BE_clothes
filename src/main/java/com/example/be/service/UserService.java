@@ -1,15 +1,13 @@
 package com.example.be.service;
 
-import com.example.be.entity.Role;
-import com.example.be.entity.User;
+import com.example.be.entity.dto.UserDTO;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public interface UserService {
-    List<User> getAllUser();
-    User saveUser(User user);
-    Role saveRole(Role role);
-    void addToUser(String username, String roleName);
+public interface UserService extends UserDetailsService {
+    UserDTO loadUserDetailByUserName(String name);
+    UserDTO saveNewUser(UserDTO user);
+    UserDTO editUser(Integer id,UserDTO user);
+    UserDTO findUserById(Integer id);
 }
