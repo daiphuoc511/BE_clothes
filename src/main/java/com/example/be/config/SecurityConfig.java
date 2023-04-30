@@ -1,7 +1,6 @@
 package com.example.be.config;
 
 import com.example.be.jwt.JwtAuthenticationFilter;
-import com.example.be.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,8 +25,6 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final UserRepository userRepository;
-
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
@@ -51,7 +48,7 @@ public class SecurityConfig {
 
                 .requestMatchers(
 
-                        "api/auth/login", "api/auth/register")
+                        "api/auth/login", "api/auth/register", "api/user/all_product")
                 .permitAll()
 
                 .anyRequest().authenticated()
@@ -85,7 +82,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         final CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(Arrays.asList("http://localhost:8080","https://pbl6.000webhostapp.com/"));
+        config.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
         config.setAllowCredentials(true);
         config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));

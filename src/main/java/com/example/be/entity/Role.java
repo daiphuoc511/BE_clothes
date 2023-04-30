@@ -12,10 +12,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "roles")
-@Data
 public class Role {
 
     @Id
@@ -26,7 +24,7 @@ public class Role {
     @Column(name = "role_name", columnDefinition = "VARCHAR(50)")
     private String roleName;
 
-    @ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "roles")
     @Fetch(value = FetchMode.SELECT)
     @JsonIgnore
     private Set<User> user = new HashSet<>();

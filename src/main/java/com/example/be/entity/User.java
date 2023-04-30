@@ -4,7 +4,6 @@ import com.example.be.entity.dto.UserDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +15,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @Table(name = "users")
 public class User {

@@ -2,7 +2,6 @@ package com.example.be.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,11 +22,9 @@ public class Product {
     @Column(name = "product_id")
     private Integer productId;
 
-    @NotBlank(message = "Tên sản phẩm không được để trống!")
     @Column(name = "product_name", columnDefinition = "varchar(50)")
     private String productName;
 
-    @NotBlank(message = "Ảnh sản phẩm không được để trống!")
     @Column(name = "image", columnDefinition = "VARCHAR(255)")
     private String image;
 
