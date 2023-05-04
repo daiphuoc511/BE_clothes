@@ -15,7 +15,7 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
 
     @Override
-    public List<Product> getAllProduct() {
-        return productRepository.getAllProduct();
+    public List<Product> getProductByColor(String color1, String color2, String color3, String color4, String color5, String color6) {
+        return productRepository.getProductByColor(color1, color2, color3, color4, color5, color6);
     }
 }

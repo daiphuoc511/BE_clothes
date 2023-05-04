@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -21,12 +22,25 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/all_product")
-    public ResponseEntity<List<Product>> getAllMovie() {
+    public ResponseEntity<List<Product>> getAllProduct() {
         try {
-            List<Product> products = productService.getAllProduct();
-            return new ResponseEntity<>(products, HttpStatus.OK);
+            LocalDate localDate = LocalDate.now();
+            String month = localDate.getMonth().toString();
+            if (month == "JANUARY" || month == "FEBRUARY" || month == "MARCH") {
+                List<Product> products = productService.getProductByColor("hong nhat", "xanh bien nhat", "vang kem", "trang kem", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            } else if (month == "APRIL" || month == "MAY" || month == "JUNE") {
+                List<Product> products = productService.getProductByColor("hong nhat", "xanh bien", "vang", "cam", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            } else if (month == "JULY" || month == "AUGUST" || month == "SEPTEMBER") {
+                List<Product> products = productService.getProductByColor("nau", "cam", "vang kem", "do", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            } else {
+                List<Product> products = productService.getProductByColor("den", "trang", "xam", "xanh la", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            }
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

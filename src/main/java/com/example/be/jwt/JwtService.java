@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Service
 public class JwtService {
-    private static final String SECRET_KEY = "012345678901234567890123456789012345678901234567890123456789";
+    private static final String SECRET_KEY = "duongdaiphuoc05012001tfdsnfksdljclcalckaslkcalkscalsckaasdasd";
 
     private static final long EXPIRE_TIME = 86400000000L;
 
@@ -45,7 +45,7 @@ public class JwtService {
 
         try {
 
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
+            Jwts.parser().setSigningKey(SECRET_KEY.getBytes()).parseClaimsJws(authToken);
 
             return true;
 
