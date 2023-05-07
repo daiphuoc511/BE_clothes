@@ -19,7 +19,7 @@ public class UserDTO implements UserDetails {
 
     private String birthday;
 
-    private Integer gender;
+    private Boolean gender;
 
     private String email;
 
@@ -59,7 +59,7 @@ public class UserDTO implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
     }
 
-    public UserDTO(Integer id, String name, String avatar, String birthday, Integer gender) {
+    public UserDTO(Integer id, String name, String avatar, String birthday, Boolean gender) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
@@ -100,11 +100,11 @@ public class UserDTO implements UserDetails {
         this.birthday = birthday;
     }
 
-    public Integer getGender() {
+    public Boolean getGender() {
         return gender;
     }
 
-    public void setGender(Integer gender) {
+    public void setGender(Boolean gender) {
         this.gender = gender;
     }
 
