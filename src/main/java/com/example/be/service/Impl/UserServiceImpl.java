@@ -1,5 +1,6 @@
 package com.example.be.service.Impl;
 
+import com.example.be.entity.Role;
 import com.example.be.entity.User;
 import com.example.be.entity.dto.UserDTO;
 import com.example.be.entity.dto.UserPrinciple;
@@ -12,7 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +31,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     RoleRepository roleRepository;
 
-
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -45,10 +51,65 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO saveNewUser(UserDTO user) {
-        User newUser = new User(user);
-        userRepository.save(newUser);
-        return null;
+    public User saveNewUser(UserDTO user) {
+        User newUser = new User();
+        newUser.setName(user.getName());
+        newUser.setEmail(user.getEmail().trim());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword().trim()));
+        newUser.setGender(user.getGender());
+        newUser.setBirthday(user.getBirthday());
+        newUser.setRoles(new HashSet<>(Arrays.asList(new Role("ROLE_MEMBER"))));
+        newUser.setFate(convertBirthdayToFate(user.getBirthday()));
+        return userRepository.save(newUser);
+    }
+
+    @Override
+    public String convertBirthdayToFate(String birthday) {
+        String fate = "";
+        String[][] can = { { "Canh", "Tan", "Nham", "Quy", "Giap", "At", "Binh", "Dinh", "Mau", "Ky" },
+                { "4", "4", "5", "5", "1", "1", "2", "2", "3", "3" } };
+        String[][] chi = { { "Than", "Dau", "Tuat", "Hoi", "Ti", "Suu", "Dan", "Mao", "Thin", "Ty", "Ngo", "Mui" },
+                { "1", "1", "2", "2", "0", "0", "1", "1", "2", "2", "0", "0" } };
+        String[] arr = birthday.split("/");
+        int year = Integer.parseInt(arr[2]);
+        int thiencan = year % 10;
+        int diachi = year % 12;
+        int a = Integer.parseInt(can[1][thiencan]) + Integer.parseInt(chi[1][diachi]);
+        if (a > 5) {
+            a = a - 5;
+            if (a == 1) {
+                fate = "Kim";
+            }
+            if (a == 2) {
+                fate = "Thuy";
+            }
+            if (a == 3) {
+                fate = "Hoa";
+            }
+            if (a == 4) {
+                fate = "Tho";
+            }
+            if (a == 5) {
+                fate = "Moc";
+            }
+        } else {
+            if (a == 1) {
+                fate = "Kim";
+            }
+            if (a == 2) {
+                fate = "Thuy";
+            }
+            if (a == 3) {
+                fate = "Hoa";
+            }
+            if (a == 4) {
+                fate = "Tho";
+            }
+            if (a == 5) {
+                fate = "Moc";
+            }
+        }
+        return fate;
     }
 
     @Override

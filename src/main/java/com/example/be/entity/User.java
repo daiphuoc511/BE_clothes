@@ -35,12 +35,12 @@ public class User {
     @Column(name = "avatar", columnDefinition = "varchar(255)")
     private String avatar;
 
-    @Column(name = "birthday", columnDefinition = "DATE")
+    @Column(name = "birthday", columnDefinition = "varchar(50)")
     private String birthday;
 
     @NotNull(message = "Giới tính không được để trống!")
-    @Column(name = "gender", columnDefinition = "int")
-    private Integer gender;
+    @Column(name = "gender", columnDefinition = "bit(1)")
+    private Boolean gender;
 
     @Column(name = "fate", columnDefinition = "varchar(15)")
     private String fate;
@@ -64,7 +64,7 @@ public class User {
     @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
     private Cart cart;
 
-    public User(Integer userId, String name, String password, String avatar, String birthday, Integer gender, String fate, Float height, Float weight, String email, Set<Role> roles, Cart cart) {
+    public User(Integer userId, String name, String password, String avatar, String birthday, Boolean gender, String fate, Float height, Float weight, String email, Set<Role> roles, Cart cart) {
         this.userId = userId;
         this.name = name;
         this.password = password;
@@ -79,7 +79,7 @@ public class User {
         this.cart = cart;
     }
 
-    public User(Integer userId, String name, String password, String avatar, String birthday, Integer gender, String email, Set<Role> roles) {
+    public User(Integer userId, String name, String password, String avatar, String birthday, Boolean gender, String email, Set<Role> roles) {
         this.userId = userId;
         this.name = name;
         this.password = password;

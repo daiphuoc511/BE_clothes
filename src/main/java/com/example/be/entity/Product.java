@@ -30,7 +30,7 @@ public class Product {
     private String image;
 
     @Column(name = "price")
-    private Float price;
+    private Integer price;
 
     @Column(name = "brand", columnDefinition = "VARCHAR(255)")
     private String brand;
