@@ -56,8 +56,8 @@ public class Product {
     @Column(name = "xxxl")
     private Integer xxxl;
 
-    @Column(name = "clothes_type", columnDefinition = "bit(1)")
-    private Boolean clothesType;
+    @Column(name = "clothes_type", columnDefinition = "int")
+    private Integer clothesType;
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;

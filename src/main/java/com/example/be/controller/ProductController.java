@@ -43,4 +43,34 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/product_female")
+    public ResponseEntity<List<Product>> getProductByClothesTypeFemale() {
+        try {
+            List<Product> products = productService.getProductByClothesType(0);
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/product_male")
+    public ResponseEntity<List<Product>> getProductByClothesTypeMale() {
+        try {
+            List<Product> products = productService.getProductByClothesType(1);
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/product_user")
+    public ResponseEntity<List<Product>> getProductByUser() {
+        try {
+            List<Product> products = productService.getProductByColor("den", "", "", "", "", "");
+            return new ResponseEntity<>(products, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
