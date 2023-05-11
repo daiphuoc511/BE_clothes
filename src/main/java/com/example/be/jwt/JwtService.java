@@ -44,9 +44,7 @@ public class JwtService {
     public boolean validateJwtToken(String authToken) {
 
         try {
-
-            Jwts.parser().setSigningKey(SECRET_KEY.getBytes()).parseClaimsJws(authToken);
-
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
             return true;
 
         } catch (SignatureException e) {
