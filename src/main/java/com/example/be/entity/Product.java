@@ -66,8 +66,8 @@ public class Product {
     @JsonBackReference
     private Set<ProductCart> productCarts;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @ManyToOne()
+    @JoinColumn(name = "category_id")
     @JsonIgnore
     private Category category;
 }
