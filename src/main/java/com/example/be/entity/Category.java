@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -23,7 +25,7 @@ public class Category {
     @Column(name = "category_name", columnDefinition = "varchar(50)")
     private String categoryName;
 
-    @OneToOne(mappedBy = "category")
+    @OneToMany(mappedBy = "category")
     @JsonIgnore
-    private Product product;
+    private Set<Product> products;
 }

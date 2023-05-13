@@ -15,4 +15,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     @Query(value = "select * from product where clothes_type = ?1", nativeQuery = true)
     List<Product> getProductByClothesType(Integer id);
+
+    List<Product> getProductByCategory_CategoryName(String name);
 }
