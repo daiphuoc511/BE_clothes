@@ -174,13 +174,4 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/product_user")
-    public ResponseEntity<List<Product>> getProductByUser() {
-        try {
-            List<Product> products = productService.getProductByColor("den", "", "", "", "", "");
-            return new ResponseEntity<>(products, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 }
