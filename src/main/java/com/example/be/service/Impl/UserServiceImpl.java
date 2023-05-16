@@ -125,4 +125,9 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findUserByUserId(id);
         return new UserDTO(user);
     }
+
+    @Override
+    public User findByUser(String email) {
+        return userRepository.findByEmail(email);
+    }
 }
