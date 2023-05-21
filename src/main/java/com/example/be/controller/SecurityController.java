@@ -70,10 +70,30 @@ public class SecurityController {
     }
 
     @GetMapping("/product_user")
-    public ResponseEntity<List<Product>> getProductByUser() {
+    public ResponseEntity<List<Product>> getProductByUser(Authentication authentication) {
+        String username = authentication.getName();
         try {
-            List<Product> products = productService.getProductByColor("den", "", "", "", "", "");
-            return new ResponseEntity<>(products, HttpStatus.OK);
+            User user = userService.findByUser(username);
+            String fate = user.getFate();
+            if(fate.equals("Kim")){
+                List<Product> products = productService.getProductByColor("trang", "vang", "xam", "", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            } else if(fate.equals("Moc")) {
+                List<Product> products = productService.getProductByColor("xanh la", "nau", "", "", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            } else if(fate.equals("Thuy")) {
+                List<Product> products = productService.getProductByColor("xanh bien", "den", "", "", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            } else if(fate.equals("Hoa")) {
+                List<Product> products = productService.getProductByColor("do", "cam", "vang", "hong", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            } else if(fate.equals("Tho")){
+                List<Product> products = productService.getProductByColor("nau", "vang kem", "", "", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            } else {
+                List<Product> products = productService.getProductByColor("", "", "", "", "", "");
+                return new ResponseEntity<>(products, HttpStatus.OK);
+            }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
