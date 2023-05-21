@@ -19,6 +19,8 @@ public class UserDTO implements UserDetails {
 
     private String birthday;
 
+    private String fate;
+
     private Integer gender;
 
     private String email;
@@ -39,6 +41,7 @@ public class UserDTO implements UserDetails {
         this.name = user.getName();
         this.avatar = user.getAvatar();
         this.birthday = user.getBirthday();
+        this.fate = user.getFate();
         this.gender = user.getGender();
     }
 
@@ -59,11 +62,12 @@ public class UserDTO implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
     }
 
-    public UserDTO(Integer id, String name, String avatar, String birthday, Integer gender) {
+    public UserDTO(Integer id, String name, String avatar, String birthday, String fate,Integer gender) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
         this.birthday = birthday;
+        this.fate = fate;
         this.gender = gender;
     }
 
@@ -98,6 +102,14 @@ public class UserDTO implements UserDetails {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String getFate() {
+        return fate;
+    }
+
+    public void setFate(String fate) {
+        this.fate = fate;
     }
 
     public Integer getGender() {
