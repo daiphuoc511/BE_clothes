@@ -76,22 +76,22 @@ public class SecurityController {
             User user = userService.findByUser(username);
             String fate = user.getFate();
             if(fate.equals("Kim")){
-                List<Product> products = productService.getProductByColor("trang", "vang", "xam", "", "", "");
+                List<Product> products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", user.getGender());
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Moc")) {
-                List<Product> products = productService.getProductByColor("xanh la", "nau", "", "", "", "");
+                List<Product> products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", user.getGender());
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Thuy")) {
-                List<Product> products = productService.getProductByColor("xanh bien", "den", "", "", "", "");
+                List<Product> products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", user.getGender());
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Hoa")) {
-                List<Product> products = productService.getProductByColor("do", "cam", "vang", "hong", "", "");
+                List<Product> products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", user.getGender());
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Tho")){
-                List<Product> products = productService.getProductByColor("nau", "vang kem", "", "", "", "");
+                List<Product> products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", user.getGender());
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else {
-                List<Product> products = productService.getProductByColor("", "", "", "", "", "");
+                List<Product> products = productService.getProductByColorAndClothesType("", "", "", "", user.getGender());
                 return new ResponseEntity<>(products, HttpStatus.OK);
             }
         } catch (Exception e) {
