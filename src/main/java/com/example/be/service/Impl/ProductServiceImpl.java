@@ -20,6 +20,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getProductByColorAndClothesType(String color1, String color2, String color3, String color4, Integer clothesType) {
+        return productRepository.getProductByColorAndClothesType(color1, color2, color3, color4, clothesType);
+    }
+
+    @Override
     public List<Product> getProductByClothesType(Integer id) {
         return productRepository.getProductByClothesType(id);
     }
