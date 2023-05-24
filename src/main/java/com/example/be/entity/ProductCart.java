@@ -19,6 +19,15 @@ public class ProductCart {
     @Column(name = "product_cart_id")
     private Integer productCartId;
 
+    @Column(name = "size", columnDefinition = "VARCHAR(10)")
+    private String size;
+
+    @Column(name = "quantity", columnDefinition = "VARCHAR(10)")
+    private String quantity;
+
+    @Column(name = "product_price")
+    private Integer productPrice;
+
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
