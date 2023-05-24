@@ -23,9 +23,6 @@ public class Cart {
     @Column(name = "cart_id")
     private Integer cartId;
 
-    @Column(name = "create_date", columnDefinition = "DATE")
-    private String createDate;
-
     @Column(name = "total_cart")
     private Float totalCart;
 

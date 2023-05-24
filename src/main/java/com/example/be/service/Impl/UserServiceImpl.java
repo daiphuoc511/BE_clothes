@@ -1,9 +1,11 @@
 package com.example.be.service.Impl;
 
+import com.example.be.entity.Cart;
 import com.example.be.entity.Role;
 import com.example.be.entity.User;
 import com.example.be.entity.dto.UserDTO;
 import com.example.be.entity.dto.UserPrinciple;
+import com.example.be.repository.CartRepository;
 import com.example.be.repository.RoleRepository;
 import com.example.be.repository.UserRepository;
 import com.example.be.service.UserService;
@@ -32,6 +34,9 @@ public class UserServiceImpl implements UserService {
     RoleRepository roleRepository;
 
     @Autowired
+    CartRepository cartRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -52,6 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveNewUser(UserDTO user) {
+        Cart cart = new Cart();
         User newUser = new User();
         newUser.setName(user.getName());
         newUser.setEmail(user.getEmail().trim());
@@ -60,6 +66,7 @@ public class UserServiceImpl implements UserService {
         newUser.setBirthday(user.getBirthday());
         newUser.setRoles(new HashSet<>(Arrays.asList(new Role("ROLE_MEMBER"))));
         newUser.setFate(convertBirthdayToFate(user.getBirthday()));
+        newUser.setCart(cartRepository.save(cart));
         return userRepository.save(newUser);
     }
 
