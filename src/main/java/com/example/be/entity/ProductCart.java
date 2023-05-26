@@ -22,8 +22,8 @@ public class ProductCart {
     @Column(name = "size", columnDefinition = "VARCHAR(10)")
     private String size;
 
-    @Column(name = "quantity", columnDefinition = "VARCHAR(10)")
-    private String quantity;
+    @Column(name = "quantity")
+    private Integer quantity;
 
     @Column(name = "product_price")
     private Integer productPrice;
