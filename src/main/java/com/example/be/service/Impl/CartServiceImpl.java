@@ -1,6 +1,7 @@
 package com.example.be.service.Impl;
 
-import com.example.be.repository.CartRepository;
+import com.example.be.entity.ProductCart;
+import com.example.be.repository.ProductCartRepository;
 import com.example.be.service.CartService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -15,5 +16,10 @@ import org.springframework.stereotype.Service;
 public class CartServiceImpl implements CartService {
 
     @Autowired
-    CartRepository cartRepository;
+    ProductCartRepository productCartRepository;
+
+    @Override
+    public ProductCart saveNewProductCart(ProductCart productCart) {
+        return productCartRepository.save(productCart);
+    }
 }
