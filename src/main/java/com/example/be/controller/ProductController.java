@@ -5,10 +5,7 @@ import com.example.be.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -174,4 +171,13 @@ public class ProductController {
         }
     }
 
+    @PatchMapping("/update_size_product/{id}")
+    public ResponseEntity<?> updateProductByProductId(@PathVariable("id") Integer id, Integer s, Integer m, Integer l, Integer xl, Integer xxl, Integer xxxl) {
+        try {
+            Product product = productService.updateProductByProductId(s, m, l, xl, xxl, xxxl, id);
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -33,4 +33,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductByCategory_CategoryName(String name) {
         return productRepository.getProductByCategory_CategoryName(name);
     }
+
+    @Override
+    public Product updateProductByProductId(Integer s, Integer m, Integer l, Integer xl, Integer xxl, Integer xxxl, Integer productId) {
+        return productRepository.updateProductByProductId(s, m, l, xl, xxl, xxxl, productId);
+    }
 }
