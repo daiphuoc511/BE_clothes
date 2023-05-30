@@ -20,4 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> getProductByClothesType(Integer id);
 
     List<Product> getProductByCategory_CategoryName(String name);
+
+    @Query(value = "update product set s = ?1, m = ?2, l = ?3, xl = ?4, xxl = ?5, xxxl = ?6 where product_id = ?7", nativeQuery = true)
+    Product updateProductByProductId(Integer s, Integer m, Integer l, Integer xl, Integer xxl, Integer xxxl, Integer productId);
 }
