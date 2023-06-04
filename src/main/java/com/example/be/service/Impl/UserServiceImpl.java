@@ -64,6 +64,8 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(passwordEncoder.encode(user.getPassword().trim()));
         newUser.setGender(user.getGender());
         newUser.setBirthday(user.getBirthday());
+        newUser.setHeight(user.getHeight());
+        newUser.setWeight(user.getWeight());
         newUser.setRoles(new HashSet<>(Arrays.asList(new Role("ROLE_MEMBER"))));
         newUser.setFate(convertBirthdayToFate(user.getBirthday()));
         newUser.setCart(cartRepository.save(cart));
@@ -137,4 +139,13 @@ public class UserServiceImpl implements UserService {
     public User findByUser(String email) {
         return userRepository.findByEmail(email);
     }
+
+    @Override
+    public void updateUser(Integer userId, UserDTO user) {
+        User updateUser = userRepository.findUserByUserId(userId);
+        updateUser.editUser(user);
+        updateUser.setFate(convertBirthdayToFate(user.getBirthday()));
+        userRepository.save(updateUser);
+    }
+
 }

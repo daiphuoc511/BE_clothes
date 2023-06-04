@@ -27,6 +27,10 @@ public class UserDTO implements UserDetails {
 
     private String password;
 
+    private int height;
+
+    private int weight;
+
     private Collection<? extends GrantedAuthority> roles;
 
     public UserDTO(Integer id, String username, String password, Collection<? extends GrantedAuthority> roles) {
@@ -43,6 +47,8 @@ public class UserDTO implements UserDetails {
         this.birthday = user.getBirthday();
         this.fate = user.getFate();
         this.gender = user.getGender();
+        this.height = user.getHeight();
+        this.weight = user.getWeight();
     }
 
     public static UserDTO build(User user){
@@ -62,13 +68,15 @@ public class UserDTO implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
     }
 
-    public UserDTO(Integer id, String name, String avatar, String birthday, String fate,Integer gender) {
+    public UserDTO(Integer id, String name, String avatar, String birthday, String fate,Integer gender, int height, int weight) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
         this.birthday = birthday;
         this.fate = fate;
         this.gender = gender;
+        this.height = height;
+        this.weight = weight;
     }
 
     public Integer getId() {
@@ -138,6 +146,22 @@ public class UserDTO implements UserDetails {
 
     public void setRoles(Collection<? extends GrantedAuthority> roles) {
         this.roles = roles;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 
     @Override

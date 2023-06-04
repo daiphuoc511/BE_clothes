@@ -13,4 +13,5 @@ public interface UserService extends UserDetailsService {
     UserDTO editUser(Integer id,UserDTO user);
     UserDTO findUserById(Integer id);
     User findByUser(String email);
+    void updateUser(Integer userId, UserDTO user);
 }

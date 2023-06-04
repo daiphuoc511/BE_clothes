@@ -8,6 +8,8 @@ import com.example.be.jwt.JwtService;
 import com.example.be.payload.request.AuthenticationRequest;
 import com.example.be.service.ProductService;
 import com.example.be.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,17 +48,21 @@ public class SecurityController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest){
-        Authentication authentication =authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        authenticationRequest.getEmail(),
-                        authenticationRequest.getPassword()
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt=jwtService.generateTokenLogin(authentication);
-        UserDetails userDetails=(UserDetails) authentication.getPrincipal();
-        UserDTO user = userService.loadUserDetailByUserName(userDetails.getUsername());
-        return new ResponseEntity<>(new JwtResponse(jwt,user,userDetails.getAuthorities()), HttpStatus.OK);
+        try {
+            Authentication authentication =authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            authenticationRequest.getEmail(),
+                            authenticationRequest.getPassword()
+                    )
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwt=jwtService.generateTokenLogin(authentication);
+            UserDetails userDetails=(UserDetails) authentication.getPrincipal();
+            UserDTO user = userService.loadUserDetailByUserName(userDetails.getUsername());
+            return new ResponseEntity<>(new JwtResponse(jwt,user,userDetails.getAuthorities()), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/register")
@@ -105,6 +111,21 @@ public class SecurityController {
         try {
            User user1 = userService.findByUser(username);
             return new ResponseEntity<>(user1, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/edit_user/{userId}")
+    public ResponseEntity<Object> updateProfileUser( @PathVariable(name = "userId") Integer userId, @RequestBody ObjectNode json) throws Exception {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.findAndRegisterModules();
+            UserDTO user = userService.findUserById(userId);
+            if(user== null) throw new Exception();
+            UserDTO userDetail = mapper.convertValue(json.get("userDTO"), UserDTO.class);
+            userService.updateUser(userId, userDetail);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

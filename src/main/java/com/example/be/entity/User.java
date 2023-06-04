@@ -30,6 +30,7 @@ public class User {
     private String name;
 
     @Column(name = "`password`", columnDefinition = "VARCHAR(255)")
+//    @Pattern(regexp = "^[a-zA-Z!@#\\$%^&*(){}_+-=/?,.:;<>~`'|\\\\[\\\\]\\\"\\\\\\\\]{6,}\\$", message = "Mật khẩu phải có ít nhất 6 kí tự")
     private String password;
 
     @Column(name = "avatar", columnDefinition = "varchar(255)")
@@ -46,12 +47,13 @@ public class User {
     private String fate;
 
     @Column(name = "height")
-    private Float height;
+    private int height;
 
     @Column(name = "weight")
-    private Float weight;
+    private int weight;
 
     @Column(name = "email", columnDefinition = "VARCHAR(50) UNIQUE NOT NULL")
+//    @Pattern(regexp = "^([0-9a-zA-Z]([-.+\\\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\\\w]*[0-9a-zA-Z]\\\\.)+[a-zA-Z]{2,9})\\$", message = "Email không đúng định dạng")
     private String email;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -64,7 +66,7 @@ public class User {
     @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
     private Cart cart;
 
-    public User(Integer userId, String name, String password, String avatar, String birthday, Integer gender, String fate, Float height, Float weight, String email, Set<Role> roles, Cart cart) {
+    public User(Integer userId, String name, String password, String avatar, String birthday, Integer gender, String fate, int height, int weight, String email, Set<Role> roles, Cart cart) {
         this.userId = userId;
         this.name = name;
         this.password = password;
@@ -106,9 +108,11 @@ public class User {
 
     public void editUser(UserDTO userDTO){
         this.name = userDTO.getName();
-        this.avatar = userDTO.getAvatar();
         this.birthday = userDTO.getBirthday();
         this.gender = userDTO.getGender();
+        this.height = userDTO.getHeight();
+        this.weight = userDTO.getWeight();
+        this.avatar = userDTO.getAvatar();
     }
 
 }
