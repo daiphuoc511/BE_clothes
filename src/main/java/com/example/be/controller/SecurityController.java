@@ -82,22 +82,47 @@ public class SecurityController {
             User user = userService.findByUser(username);
             String fate = user.getFate();
             if(fate.equals("Kim")){
-                List<Product> products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", user.getGender());
+                List<Product> products;
+                if(user.getGender() == 0 || user.getGender() == 1){
+                    products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", user.getGender(), 2);
+                } else {
+                    products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", user.getGender(), user.getGender());
+                }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Moc")) {
-                List<Product> products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", user.getGender());
+                List<Product> products;
+                if(user.getGender() == 0 || user.getGender() == 1){
+                    products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", user.getGender(), 2);
+                } else {
+                    products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", user.getGender(), user.getGender());
+                }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Thuy")) {
-                List<Product> products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", user.getGender());
+                List<Product> products;
+                if(user.getGender() == 0 || user.getGender() == 1){
+                    products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", user.getGender(), 2);
+                } else {
+                    products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", user.getGender(), user.getGender());
+                }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Hoa")) {
-                List<Product> products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", user.getGender());
+                List<Product> products;
+                if(user.getGender() == 0 || user.getGender() == 1) {
+                    products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", user.getGender(), 2);
+                } else {
+                    products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", user.getGender(), user.getGender());
+                }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Tho")){
-                List<Product> products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", user.getGender());
+                List<Product> products;
+                if(user.getGender() == 0 || user.getGender() == 1) {
+                    products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", user.getGender(), 2);
+                } else {
+                    products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", user.getGender(), user.getGender());
+                }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else {
-                List<Product> products = productService.getProductByColorAndClothesType("", "", "", "", user.getGender());
+                List<Product> products = productService.getProductByColorAndClothesType("", "", "", "", user.getGender(), user.getGender());
                 return new ResponseEntity<>(products, HttpStatus.OK);
             }
         } catch (Exception e) {

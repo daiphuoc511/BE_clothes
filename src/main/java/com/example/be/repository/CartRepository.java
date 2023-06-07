@@ -10,4 +10,6 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
 
     @Query(value = "update cart set total_cart = ? where cart_id = ?", nativeQuery = true)
     Cart updateTotalCart(Integer cartId, Float total);
+
+
 }
