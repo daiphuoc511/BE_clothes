@@ -44,7 +44,7 @@ public class ProductController {
     @GetMapping("/product_female")
     public ResponseEntity<List<Product>> getProductByClothesTypeFemale() {
         try {
-            List<Product> products = productService.getProductByClothesType(0);
+            List<Product> products = productService.getProductByClothesType(0, 2);
             return new ResponseEntity<>(products, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -54,7 +54,7 @@ public class ProductController {
     @GetMapping("/product_male")
     public ResponseEntity<List<Product>> getProductByClothesTypeMale() {
         try {
-            List<Product> products = productService.getProductByClothesType(1);
+            List<Product> products = productService.getProductByClothesType(1, 2);
             return new ResponseEntity<>(products, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

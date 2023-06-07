@@ -10,4 +10,5 @@ import java.util.List;
 public interface ProductCartRepository extends JpaRepository<ProductCart, Integer> {
 
     List<ProductCart> getProductCartByCart_CartId(Integer cartId);
+
 }
