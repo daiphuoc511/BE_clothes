@@ -27,9 +27,9 @@ public class UserDTO implements UserDetails {
 
     private String password;
 
-    private int height;
+    private String height;
 
-    private int weight;
+    private String weight;
 
     private Collection<? extends GrantedAuthority> roles;
 
@@ -68,7 +68,7 @@ public class UserDTO implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList());
     }
 
-    public UserDTO(Integer id, String name, String avatar, String birthday, String fate,Integer gender, int height, int weight) {
+    public UserDTO(Integer id, String name, String avatar, String birthday, String fate,Integer gender, String height, String weight) {
         this.id = id;
         this.name = name;
         this.avatar = avatar;
@@ -148,19 +148,19 @@ public class UserDTO implements UserDetails {
         this.roles = roles;
     }
 
-    public int getHeight() {
+    public String getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(String height) {
         this.height = height;
     }
 
-    public int getWeight() {
+    public String getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(String weight) {
         this.weight = weight;
     }
 
