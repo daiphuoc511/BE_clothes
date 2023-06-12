@@ -46,11 +46,11 @@ public class User {
     @Column(name = "fate", columnDefinition = "varchar(15)")
     private String fate;
 
-    @Column(name = "height")
-    private int height;
+    @Column(name = "height", columnDefinition = "varchar(3)")
+    private String height;
 
-    @Column(name = "weight")
-    private int weight;
+    @Column(name = "weight", columnDefinition = "varchar(3)")
+    private String weight;
 
     @Column(name = "email", columnDefinition = "VARCHAR(50) UNIQUE NOT NULL")
 //    @Pattern(regexp = "^([0-9a-zA-Z]([-.+\\\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\\\w]*[0-9a-zA-Z]\\\\.)+[a-zA-Z]{2,9})\\$", message = "Email không đúng định dạng")
@@ -66,7 +66,7 @@ public class User {
     @JoinColumn(name = "cart_id", referencedColumnName = "cart_id")
     private Cart cart;
 
-    public User(Integer userId, String name, String password, String avatar, String birthday, Integer gender, String fate, int height, int weight, String email, Set<Role> roles, Cart cart) {
+    public User(Integer userId, String name, String password, String avatar, String birthday, Integer gender, String fate, String height, String weight, String email, Set<Role> roles, Cart cart) {
         this.userId = userId;
         this.name = name;
         this.password = password;

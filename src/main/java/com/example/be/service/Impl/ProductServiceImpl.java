@@ -38,4 +38,66 @@ public class ProductServiceImpl implements ProductService {
     public Product updateProductByProductId(Integer s, Integer m, Integer l, Integer xl, Integer xxl, Integer xxxl, Integer productId) {
         return productRepository.updateProductByProductId(s, m, l, xl, xxl, xxxl, productId);
     }
+
+    @Override
+    public List<Product> getProductByClothesTypeAndSGreaterThan(Integer clothesType1, Integer clothesType2, Integer s) {
+        return productRepository.getProductByClothesTypeAndSGreaterThan(clothesType1, clothesType2, s);
+    }
+
+    @Override
+    public List<Product> getProductByClothesTypeAndMGreaterThan(Integer clothesType1, Integer clothesType2, Integer m) {
+        return productRepository.getProductByClothesTypeAndMGreaterThan(clothesType1, clothesType2, m);
+    }
+
+    @Override
+    public List<Product> getProductByClothesTypeAndLGreaterThan(Integer clothesType1, Integer clothesType2, Integer l) {
+        return productRepository.getProductByClothesTypeAndLGreaterThan(clothesType1, clothesType2, l);
+    }
+
+    @Override
+    public List<Product> getProductByClothesTypeAndXlGreaterThan(Integer clothesType1, Integer clothesType2, Integer xl) {
+        return productRepository.getProductByClothesTypeAndXlGreaterThan(clothesType1, clothesType2, xl);
+    }
+
+    @Override
+    public List<Product> getProductByClothesTypeAndXxlGreaterThan(Integer clothesType1, Integer clothesType2, Integer xxl) {
+        return productRepository.getProductByClothesTypeAndXxlGreaterThan(clothesType1, clothesType2, xxl);
+    }
+
+    @Override
+    public List<Product> getProductByClothesTypeAndXxxlGreaterThan(Integer clothesType1, Integer clothesType2, Integer xxxl) {
+        return productRepository.getProductByClothesTypeAndXxxlGreaterThan(clothesType1, clothesType2, xxxl);
+    }
+
+    @Override
+    public List<Product> getProductBySGreaterThanAndCategory_CategoryName(Integer s, String categoryName) {
+        return productRepository.getProductBySGreaterThanAndCategory_CategoryName(s, categoryName);
+    }
+
+    @Override
+    public List<Product> getProductByMGreaterThanAndCategory_CategoryName(Integer m, String categoryName) {
+        return productRepository.getProductByMGreaterThanAndCategory_CategoryName(m, categoryName);
+    }
+
+    @Override
+    public List<Product> getProductByLGreaterThanAndCategory_CategoryName(Integer l, String categoryName) {
+        return productRepository.getProductByLGreaterThanAndCategory_CategoryName(l, categoryName);
+    }
+
+    @Override
+    public List<Product> getProductByXlGreaterThanAndCategory_CategoryName(Integer xl, String categoryName) {
+        return productRepository.getProductByXlGreaterThanAndCategory_CategoryName(xl, categoryName);
+    }
+
+    @Override
+    public List<Product> getProductByXxlGreaterThanAndCategory_CategoryName(Integer xxl, String categoryName) {
+        return productRepository.getProductByXxlGreaterThanAndCategory_CategoryName(xxl, categoryName);
+    }
+
+    @Override
+    public List<Product> getProductByXxxlGreaterThanAndCategory_CategoryName(Integer xxxl, String categoryName) {
+        return productRepository.getProductByXxxlGreaterThanAndCategory_CategoryName(xxxl, categoryName);
+    }
+
+
 }
