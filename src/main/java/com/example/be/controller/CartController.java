@@ -41,6 +41,7 @@ public class CartController {
                     productCarts.get(i).setQuantity(productCarts.get(i).getQuantity() + productCart.getQuantity());
                     productCarts.get(i).setProductPrice(productCarts.get(i).getProductPrice() + productCart.getProductPrice());
                     productCart1 = cartService.saveNewProductCart(productCarts.get(i));
+                    break;
                 } else if (productCart.getProduct().getProductId() == productCarts.get(i).getProduct().getProductId()
                          && i == productCarts.size()-1) {
                     if(productCart.getSize().equals(productCarts.get(i).getSize()) != false) {
@@ -63,6 +64,20 @@ public class CartController {
             User user1 = userService.findByUser(username);
             List<ProductCart> productCarts = cartService.getProductCartByCartId(user1.getCart().getCartId());
             return new ResponseEntity<>(productCarts, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/delete_product_cart/{productCartId}")
+    public ResponseEntity<?> deleteProductCart(@PathVariable("productCartId") Integer productCartId) {
+        try {
+            ProductCart productCart = cartService.findProductCartByProductCartId(productCartId);
+            if (productCart == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            cartService.deleteProductCartByProductCartId(productCartId);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
