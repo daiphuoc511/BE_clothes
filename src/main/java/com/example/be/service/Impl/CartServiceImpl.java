@@ -40,4 +40,14 @@ public class CartServiceImpl implements CartService {
         return cartRepository.updateTotalCart(cartId, total);
     }
 
+    @Override
+    public ProductCart findProductCartByProductCartId(Integer id) {
+        return productCartRepository.findProductCartByProductCartId(id);
+    }
+
+    @Override
+    public void deleteProductCartByProductCartId(Integer id) {
+        productCartRepository.deleteProductCartByProductCartId(id);
+    }
+
 }

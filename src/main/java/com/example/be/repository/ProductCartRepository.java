@@ -11,4 +11,7 @@ public interface ProductCartRepository extends JpaRepository<ProductCart, Intege
 
     List<ProductCart> getProductCartByCart_CartId(Integer cartId);
 
+    ProductCart findProductCartByProductCartId(Integer id);
+
+    void deleteProductCartByProductCartId(Integer id);
 }

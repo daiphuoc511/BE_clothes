@@ -9,4 +9,6 @@ public interface CartService {
     ProductCart saveNewProductCart(ProductCart productCart);
     List<ProductCart> getProductCartByCartId(Integer cartId);
     Cart updateTotalCart(Integer cartId, Float total);
+    ProductCart findProductCartByProductCartId(Integer id);
+    void deleteProductCartByProductCartId(Integer id);
 }
