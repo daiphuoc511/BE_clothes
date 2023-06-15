@@ -24,6 +24,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -88,48 +89,70 @@ public class SecurityController {
         try {
             User user = userService.findByUser(username);
             String fate = user.getFate();
+            LocalDate localDate = LocalDate.now();
+            String month = localDate.getMonth().toString();
             if(fate.equals("Kim")){
                 List<Product> products;
-                if(user.getGender() == 0 || user.getGender() == 1){
-                    products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", user.getGender(), 2);
+                if (month == "JANUARY" || month == "FEBRUARY" || month == "MARCH") {
+                    products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", "hong nhat", "xanh bien nhat", "vang kem", "trang kem", user.getGender(), 2);
+                } else if (month == "APRIL" || month == "MAY" || month == "JUNE") {
+                    products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", "hong nhat", "xanh bien", "", "cam", user.getGender(), 2);
+                } else if (month == "JULY" || month == "AUGUST" || month == "SEPTEMBER") {
+                    products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", "nau", "cam", "vang kem", "do", user.getGender(), 2);
                 } else {
-                    products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", user.getGender(), user.getGender());
+                    products = productService.getProductByColorAndClothesType("trang", "vang", "xam", "", "den", "", "", "xanh la", user.getGender(), 2);
                 }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Moc")) {
                 List<Product> products;
-                if(user.getGender() == 0 || user.getGender() == 1){
-                    products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", user.getGender(), 2);
+                if (month == "JANUARY" || month == "FEBRUARY" || month == "MARCH") {
+                    products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", "hong nhat", "xanh bien nhat", "vang kem", "trang kem", user.getGender(), 2);
+                } else if (month == "APRIL" || month == "MAY" || month == "JUNE") {
+                    products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", "hong nhat", "xanh bien", "", "cam", user.getGender(), 2);
+                } else if (month == "JULY" || month == "AUGUST" || month == "SEPTEMBER") {
+                    products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", "", "cam", "vang kem", "do", user.getGender(), 2);
                 } else {
-                    products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", user.getGender(), user.getGender());
+                    products = productService.getProductByColorAndClothesType("xanh la", "nau", "", "", "den", "", "", "", user.getGender(), 2);
                 }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Thuy")) {
                 List<Product> products;
-                if(user.getGender() == 0 || user.getGender() == 1){
-                    products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", user.getGender(), 2);
+                if (month == "JANUARY" || month == "FEBRUARY" || month == "MARCH") {
+                    products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", "hong nhat", "xanh bien nhat", "vang kem", "trang kem", user.getGender(), 2);
+                } else if (month == "APRIL" || month == "MAY" || month == "JUNE") {
+                    products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", "hong nhat", "", "", "cam", user.getGender(), 2);
+                } else if (month == "JULY" || month == "AUGUST" || month == "SEPTEMBER") {
+                    products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", "nau", "cam", "vang kem", "do", user.getGender(), 2);
                 } else {
-                    products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", user.getGender(), user.getGender());
+                    products = productService.getProductByColorAndClothesType("xanh bien", "den", "", "", "", "", "", "xanh la", user.getGender(), 2);
                 }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Hoa")) {
                 List<Product> products;
-                if(user.getGender() == 0 || user.getGender() == 1) {
-                    products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", user.getGender(), 2);
+                if (month == "JANUARY" || month == "FEBRUARY" || month == "MARCH") {
+                    products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", "hong nhat", "xanh bien nhat", "vang kem", "trang kem", user.getGender(), 2);
+                } else if (month == "APRIL" || month == "MAY" || month == "JUNE") {
+                    products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", "hong nhat", "xanh bien", "", "", user.getGender(), 2);
+                } else if (month == "JULY" || month == "AUGUST" || month == "SEPTEMBER") {
+                    products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", "nau", "", "vang kem", "", user.getGender(), 2);
                 } else {
-                    products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", user.getGender(), user.getGender());
+                    products = productService.getProductByColorAndClothesType("do", "cam", "vang", "hong", "den", "", "", "xanh la", user.getGender(), 2);
                 }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else if(fate.equals("Tho")){
                 List<Product> products;
-                if(user.getGender() == 0 || user.getGender() == 1) {
-                    products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", user.getGender(), 2);
+                if (month == "JANUARY" || month == "FEBRUARY" || month == "MARCH") {
+                    products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", "hong nhat", "xanh bien nhat", "", "trang kem", user.getGender(), 2);
+                } else if (month == "APRIL" || month == "MAY" || month == "JUNE") {
+                    products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", "hong nhat", "xanh bien", "", "cam", user.getGender(), 2);
+                } else if (month == "JULY" || month == "AUGUST" || month == "SEPTEMBER") {
+                    products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", "", "cam", "", "do", user.getGender(), 2);
                 } else {
-                    products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", user.getGender(), user.getGender());
+                    products = productService.getProductByColorAndClothesType("nau", "vang kem", "", "", "den", "", "", "xanh la", user.getGender(), 2);
                 }
                 return new ResponseEntity<>(products, HttpStatus.OK);
             } else {
-                List<Product> products = productService.getProductByColorAndClothesType("", "", "", "", user.getGender(), user.getGender());
+                List<Product> products = productService.getProductByColorAndClothesType("", "", "", "","", "", "", "", user.getGender(), 2);
                 return new ResponseEntity<>(products, HttpStatus.OK);
             }
         } catch (Exception e) {
@@ -149,10 +172,40 @@ public class SecurityController {
                 if((user.getHeight() == null && user.getWeight() == null) || (user.getHeight().isEmpty() && user.getWeight().isEmpty())
                         || (user.getHeight() == null && user.getWeight().isEmpty()) || (user.getHeight().isEmpty() && user.getWeight() == null)) {
                     return new ResponseEntity<>(HttpStatus.OK);
+                } else if (user.getHeight() == null || user.getHeight().isEmpty()) {
+                    if (Integer.parseInt(user.getWeight()) >= 40 && Integer.parseInt(user.getWeight()) < 55) {
+                        products = productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getWeight()) >= 50 && Integer.parseInt(user.getWeight()) <= 60) {
+                        products = productService.getProductByClothesTypeAndMGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getWeight()) >= 55 && Integer.parseInt(user.getWeight()) <= 65) {
+                        products = productService.getProductByClothesTypeAndLGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getWeight()) >= 60 && Integer.parseInt(user.getWeight()) <= 70) {
+                        products = productService.getProductByClothesTypeAndXlGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getWeight()) >= 65 && Integer.parseInt(user.getWeight()) <= 75) {
+                        products = productService.getProductByClothesTypeAndXxlGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getWeight()) >= 70 && Integer.parseInt(user.getWeight()) <= 80) {
+                        products = productService.getProductByClothesTypeAndXxxlGreaterThan(user.getGender(), 2, 0);
+                    }
+                    return new ResponseEntity<>(products, HttpStatus.OK);
+                } else if (user.getWeight() == null || user.getWeight().isEmpty()) {
+                    if (Integer.parseInt(user.getHeight()) >= 145 && Integer.parseInt(user.getHeight()) <= 160) {
+                        products = productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getHeight()) >= 155 && Integer.parseInt(user.getHeight()) <= 165) {
+                        products = productService.getProductByClothesTypeAndMGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getHeight()) >= 160 && Integer.parseInt(user.getHeight()) <= 170) {
+                        products = productService.getProductByClothesTypeAndLGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getHeight()) >= 165 && Integer.parseInt(user.getHeight()) <= 175) {
+                        products = productService.getProductByClothesTypeAndXlGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getHeight()) >= 170 && Integer.parseInt(user.getHeight()) <= 180) {
+                        products = productService.getProductByClothesTypeAndXxlGreaterThan(user.getGender(), 2, 0);
+                    } else if (Integer.parseInt(user.getHeight()) >= 175 && Integer.parseInt(user.getHeight()) <= 185) {
+                        products = productService.getProductByClothesTypeAndXxxlGreaterThan(user.getGender(), 2, 0);
+                    }
+                    return new ResponseEntity<>(products, HttpStatus.OK);
                 } else {
                     if (((Integer.parseInt(user.getHeight()) >= 150 && Integer.parseInt(user.getHeight()) <= 160) &&
                             (Integer.parseInt(user.getWeight()) >= 40 && Integer.parseInt(user.getWeight()) < 45))
-                        || ((Integer.parseInt(user.getHeight()) >= 145 && Integer.parseInt(user.getHeight()) < 150) &&
+                            || ((Integer.parseInt(user.getHeight()) >= 145 && Integer.parseInt(user.getHeight()) < 150) &&
                             (Integer.parseInt(user.getWeight()) >= 45 && Integer.parseInt(user.getWeight()) <= 50))) {
                         if (user.getGender() == 0 || user.getGender() == 1)
                             products = productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0);
@@ -198,6 +251,84 @@ public class SecurityController {
                     return new ResponseEntity<>(products, HttpStatus.OK);
                 }
             } else {
+                if((user.getHeight() == null && user.getWeight() == null) || (user.getHeight().isEmpty() && user.getWeight().isEmpty())
+                        || (user.getHeight() == null && user.getWeight().isEmpty()) || (user.getHeight().isEmpty() && user.getWeight() == null)) {
+                    return new ResponseEntity<>(HttpStatus.OK);
+                } else if (user.getHeight() == null || user.getHeight().isEmpty()) {
+                    if (Integer.parseInt(user.getWeight()) >= 40 && Integer.parseInt(user.getWeight()) < 55) {
+                        products1.addAll(productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getWeight()) >= 50 && Integer.parseInt(user.getWeight()) <= 60) {
+                        products1.addAll(productService.getProductByClothesTypeAndMGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getWeight()) >= 55 && Integer.parseInt(user.getWeight()) <= 65) {
+                        products1.addAll(productService.getProductByClothesTypeAndLGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getWeight()) >= 60 && Integer.parseInt(user.getWeight()) <= 70) {
+                        products1.addAll(productService.getProductByClothesTypeAndXlGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getWeight()) >= 65 && Integer.parseInt(user.getWeight()) <= 75) {
+                        products1.addAll(productService.getProductByClothesTypeAndXxlGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getWeight()) >= 70 && Integer.parseInt(user.getWeight()) <= 80) {
+                        products1.addAll(productService.getProductByClothesTypeAndXxxlGreaterThan(user.getGender(), 2, 0));
+                    }
+                } else if (user.getWeight() == null || user.getWeight().isEmpty()) {
+                    if (Integer.parseInt(user.getHeight()) >= 145 && Integer.parseInt(user.getHeight()) <= 160) {
+                        products1.addAll(productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getHeight()) >= 155 && Integer.parseInt(user.getHeight()) <= 165) {
+                        products1.addAll(productService.getProductByClothesTypeAndMGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getHeight()) >= 160 && Integer.parseInt(user.getHeight()) <= 170) {
+                        products1.addAll(productService.getProductByClothesTypeAndLGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getHeight()) >= 165 && Integer.parseInt(user.getHeight()) <= 175) {
+                        products1.addAll(productService.getProductByClothesTypeAndXlGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getHeight()) >= 170 && Integer.parseInt(user.getHeight()) <= 180) {
+                        products1.addAll(productService.getProductByClothesTypeAndXxlGreaterThan(user.getGender(), 2, 0));
+                    } else if (Integer.parseInt(user.getHeight()) >= 175 && Integer.parseInt(user.getHeight()) <= 185) {
+                        products1.addAll(productService.getProductByClothesTypeAndXxxlGreaterThan(user.getGender(), 2, 0));
+                    }
+                } else {
+                    if (((Integer.parseInt(user.getHeight()) >= 150 && Integer.parseInt(user.getHeight()) <= 160) &&
+                            (Integer.parseInt(user.getWeight()) >= 40 && Integer.parseInt(user.getWeight()) < 45))
+                            || ((Integer.parseInt(user.getHeight()) >= 145 && Integer.parseInt(user.getHeight()) < 150) &&
+                            (Integer.parseInt(user.getWeight()) >= 45 && Integer.parseInt(user.getWeight()) <= 50))) {
+                        if (user.getGender() == 0 || user.getGender() == 1)
+                            products1.addAll(productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0));
+                    } else if ((Integer.parseInt(user.getHeight()) >= 150 && Integer.parseInt(user.getHeight()) <= 160) &&
+                            (Integer.parseInt(user.getWeight()) >= 45 && Integer.parseInt(user.getWeight()) <= 55)) {
+                        if (Integer.parseInt(user.getHeight()) > 155 && Integer.parseInt(user.getWeight()) > 50) {
+                            products1.addAll(productService.getProductByClothesTypeAndMGreaterThan(user.getGender(), 2, 0));
+                        } else {
+                            products1.addAll(productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0));
+                        }
+                    } else if ((Integer.parseInt(user.getHeight()) >= 155 && Integer.parseInt(user.getHeight()) <= 165) &&
+                            (Integer.parseInt(user.getWeight()) >= 50 && Integer.parseInt(user.getWeight()) <= 60)) {
+                        if (Integer.parseInt(user.getHeight()) > 160 && Integer.parseInt(user.getWeight()) > 55) {
+                            products1.addAll(productService.getProductByClothesTypeAndLGreaterThan(user.getGender(), 2, 0));
+                        } else {
+                            products1.addAll(productService.getProductByClothesTypeAndMGreaterThan(user.getGender(), 2, 0));
+                        }
+                    } else if ((Integer.parseInt(user.getHeight()) >= 160 && Integer.parseInt(user.getHeight()) <= 170) &&
+                            (Integer.parseInt(user.getWeight()) >= 55 && Integer.parseInt(user.getWeight()) <= 65)) {
+                        if (Integer.parseInt(user.getHeight()) > 165 && Integer.parseInt(user.getWeight()) > 60) {
+                            products1.addAll(productService.getProductByClothesTypeAndXlGreaterThan(user.getGender(), 2, 0));
+                        } else {
+                            products1.addAll(productService.getProductByClothesTypeAndLGreaterThan(user.getGender(), 2, 0));
+                        }
+                    } else if ((Integer.parseInt(user.getHeight()) >= 165 && Integer.parseInt(user.getHeight()) <= 175) &&
+                            (Integer.parseInt(user.getWeight()) >= 60 && Integer.parseInt(user.getWeight()) <= 70)) {
+                        if (Integer.parseInt(user.getHeight()) > 170 && Integer.parseInt(user.getWeight()) > 65) {
+                            products1.addAll(productService.getProductByClothesTypeAndXxlGreaterThan(user.getGender(), 2, 0));
+                        } else {
+                            products1.addAll(productService.getProductByClothesTypeAndXlGreaterThan(user.getGender(), 2, 0));
+                        }
+                    } else if ((Integer.parseInt(user.getHeight()) >= 170 && Integer.parseInt(user.getHeight()) <= 180) &&
+                            (Integer.parseInt(user.getWeight()) >= 65 && Integer.parseInt(user.getWeight()) <= 75)) {
+                        if (Integer.parseInt(user.getHeight()) > 175 && Integer.parseInt(user.getWeight()) > 70) {
+                            products1.addAll(productService.getProductByClothesTypeAndXxxlGreaterThan(user.getGender(), 2, 0));
+                        } else {
+                            products1.addAll(productService.getProductByClothesTypeAndXxlGreaterThan(user.getGender(), 2, 0));
+                        }
+                    } else if ((Integer.parseInt(user.getHeight()) >= 175 && Integer.parseInt(user.getHeight()) <= 185) &&
+                            (Integer.parseInt(user.getWeight()) >= 70 && Integer.parseInt(user.getWeight()) <= 80)) {
+                        products1.addAll(productService.getProductByClothesTypeAndXxxlGreaterThan(user.getGender(), 2, 0));
+                    }
+                }
                 for (int i = 0; i < productCarts.size(); i++) {
                     if (productCarts.get(i).getSize().equals("S")) {
                         products1.addAll(productService.getProductBySGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));

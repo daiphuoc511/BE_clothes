@@ -13,8 +13,8 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "select * from product where color in (?1, ?2, ?3, ?4, ?5, ?6)", nativeQuery = true)
     List<Product> getProductByColor(String color1, String color2, String color3, String color4, String color5, String color6);
 
-    @Query(value = "select * from product where color in (?1, ?2, ?3, ?4) and  clothes_type in (?5, ?6)", nativeQuery = true)
-    List<Product> getProductByColorAndClothesType(String color1, String color2, String color3, String color4, Integer clothesType1, Integer clothesType2);
+    @Query(value = "select * from product where color in (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8) and  clothes_type in (?9, ?10)", nativeQuery = true)
+    List<Product> getProductByColorAndClothesType(String color1, String color2, String color3, String color4, String color5, String color6, String color7, String color8, Integer clothesType1, Integer clothesType2);
 
     @Query(value = "select * from product where clothes_type in (?1, ?2)", nativeQuery = true)
     List<Product> getProductByClothesType(Integer id1, Integer id2);
