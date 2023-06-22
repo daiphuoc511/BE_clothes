@@ -207,7 +207,6 @@ public class SecurityController {
                             (Integer.parseInt(user.getWeight()) >= 40 && Integer.parseInt(user.getWeight()) < 45))
                             || ((Integer.parseInt(user.getHeight()) >= 145 && Integer.parseInt(user.getHeight()) < 150) &&
                             (Integer.parseInt(user.getWeight()) >= 45 && Integer.parseInt(user.getWeight()) <= 50))) {
-                        if (user.getGender() == 0 || user.getGender() == 1)
                             products = productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0);
                     } else if ((Integer.parseInt(user.getHeight()) >= 150 && Integer.parseInt(user.getHeight()) <= 160) &&
                             (Integer.parseInt(user.getWeight()) >= 45 && Integer.parseInt(user.getWeight()) <= 55)) {
@@ -253,7 +252,22 @@ public class SecurityController {
             } else {
                 if((user.getHeight() == null && user.getWeight() == null) || (user.getHeight().isEmpty() && user.getWeight().isEmpty())
                         || (user.getHeight() == null && user.getWeight().isEmpty()) || (user.getHeight().isEmpty() && user.getWeight() == null)) {
-                    return new ResponseEntity<>(HttpStatus.OK);
+                    for (int i = 0; i < productCarts.size(); i++) {
+                        if (productCarts.get(i).getSize().equals("S")) {
+                            products1.addAll(productService.getProductBySGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("M")) {
+                            products1.addAll(productService.getProductByMGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("L")) {
+                            products1.addAll(productService.getProductByLGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XL")) {
+                            products1.addAll(productService.getProductByXlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XXL")) {
+                            products1.addAll(productService.getProductByXxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XXXL")) {
+                            products1.addAll(productService.getProductByXxxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        }
+                    }
+                    return new ResponseEntity<>(products1, HttpStatus.OK);
                 } else if (user.getHeight() == null || user.getHeight().isEmpty()) {
                     if (Integer.parseInt(user.getWeight()) >= 40 && Integer.parseInt(user.getWeight()) < 55) {
                         products1.addAll(productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0));
@@ -267,6 +281,21 @@ public class SecurityController {
                         products1.addAll(productService.getProductByClothesTypeAndXxlGreaterThan(user.getGender(), 2, 0));
                     } else if (Integer.parseInt(user.getWeight()) >= 70 && Integer.parseInt(user.getWeight()) <= 80) {
                         products1.addAll(productService.getProductByClothesTypeAndXxxlGreaterThan(user.getGender(), 2, 0));
+                    }
+                    for (int i = 0; i < productCarts.size(); i++) {
+                        if (productCarts.get(i).getSize().equals("S")) {
+                            products1.addAll(productService.getProductBySGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("M")) {
+                            products1.addAll(productService.getProductByMGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("L")) {
+                            products1.addAll(productService.getProductByLGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XL")) {
+                            products1.addAll(productService.getProductByXlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XXL")) {
+                            products1.addAll(productService.getProductByXxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XXXL")) {
+                            products1.addAll(productService.getProductByXxxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        }
                     }
                 } else if (user.getWeight() == null || user.getWeight().isEmpty()) {
                     if (Integer.parseInt(user.getHeight()) >= 145 && Integer.parseInt(user.getHeight()) <= 160) {
@@ -282,12 +311,26 @@ public class SecurityController {
                     } else if (Integer.parseInt(user.getHeight()) >= 175 && Integer.parseInt(user.getHeight()) <= 185) {
                         products1.addAll(productService.getProductByClothesTypeAndXxxlGreaterThan(user.getGender(), 2, 0));
                     }
+                    for (int i = 0; i < productCarts.size(); i++) {
+                        if (productCarts.get(i).getSize().equals("S")) {
+                            products1.addAll(productService.getProductBySGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("M")) {
+                            products1.addAll(productService.getProductByMGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("L")) {
+                            products1.addAll(productService.getProductByLGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XL")) {
+                            products1.addAll(productService.getProductByXlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XXL")) {
+                            products1.addAll(productService.getProductByXxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XXXL")) {
+                            products1.addAll(productService.getProductByXxxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        }
+                    }
                 } else {
                     if (((Integer.parseInt(user.getHeight()) >= 150 && Integer.parseInt(user.getHeight()) <= 160) &&
                             (Integer.parseInt(user.getWeight()) >= 40 && Integer.parseInt(user.getWeight()) < 45))
                             || ((Integer.parseInt(user.getHeight()) >= 145 && Integer.parseInt(user.getHeight()) < 150) &&
                             (Integer.parseInt(user.getWeight()) >= 45 && Integer.parseInt(user.getWeight()) <= 50))) {
-                        if (user.getGender() == 0 || user.getGender() == 1)
                             products1.addAll(productService.getProductByClothesTypeAndSGreaterThan(user.getGender(), 2, 0));
                     } else if ((Integer.parseInt(user.getHeight()) >= 150 && Integer.parseInt(user.getHeight()) <= 160) &&
                             (Integer.parseInt(user.getWeight()) >= 45 && Integer.parseInt(user.getWeight()) <= 55)) {
@@ -328,22 +371,37 @@ public class SecurityController {
                             (Integer.parseInt(user.getWeight()) >= 70 && Integer.parseInt(user.getWeight()) <= 80)) {
                         products1.addAll(productService.getProductByClothesTypeAndXxxlGreaterThan(user.getGender(), 2, 0));
                     }
-                }
-                for (int i = 0; i < productCarts.size(); i++) {
-                    if (productCarts.get(i).getSize().equals("S")) {
-                        products1.addAll(productService.getProductBySGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
-                    } else if (productCarts.get(i).getSize().equals("M")) {
-                        products1.addAll(productService.getProductByMGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
-                    } else if (productCarts.get(i).getSize().equals("L")) {
-                        products1.addAll(productService.getProductByLGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
-                    } else if (productCarts.get(i).getSize().equals("XL")) {
-                        products1.addAll(productService.getProductByXlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
-                    } else if (productCarts.get(i).getSize().equals("XXL")) {
-                        products1.addAll(productService.getProductByXxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
-                    } else if (productCarts.get(i).getSize().equals("XXXL")) {
-                        products1.addAll(productService.getProductByXxxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                    for (int i = 0; i < productCarts.size(); i++) {
+                        if (productCarts.get(i).getSize().equals("S")) {
+                            products1.addAll(productService.getProductBySGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("M")) {
+                            products1.addAll(productService.getProductByMGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("L")) {
+                            products1.addAll(productService.getProductByLGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XL")) {
+                            products1.addAll(productService.getProductByXlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XXL")) {
+                            products1.addAll(productService.getProductByXxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        } else if (productCarts.get(i).getSize().equals("XXXL")) {
+                            products1.addAll(productService.getProductByXxxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+                        }
                     }
                 }
+//                for (int i = 0; i < productCarts.size(); i++) {
+//                    if (productCarts.get(i).getSize().equals("S")) {
+//                        products1.addAll(productService.getProductBySGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+//                    } else if (productCarts.get(i).getSize().equals("M")) {
+//                        products1.addAll(productService.getProductByMGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+//                    } else if (productCarts.get(i).getSize().equals("L")) {
+//                        products1.addAll(productService.getProductByLGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+//                    } else if (productCarts.get(i).getSize().equals("XL")) {
+//                        products1.addAll(productService.getProductByXlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+//                    } else if (productCarts.get(i).getSize().equals("XXL")) {
+//                        products1.addAll(productService.getProductByXxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+//                    } else if (productCarts.get(i).getSize().equals("XXXL")) {
+//                        products1.addAll(productService.getProductByXxxlGreaterThanAndCategory_CategoryName(0, productCarts.get(i).getProduct().getCategory().getCategoryName()));
+//                    }
+//                }
                 HashSet<Product> products2 = new HashSet<>(products1);
                 products1.clear();
                 products1.addAll(products2);
